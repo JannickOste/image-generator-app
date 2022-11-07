@@ -23,7 +23,6 @@ const Create = () => {
       await cameraRef.current
         .takePictureAsync({ quality: 1, exif: false })
         .then(async (photo) => {
-          console.log(photo.uri);
           await MediaLibrary.saveToLibraryAsync(photo.uri);
           setPhoto(photo.uri);
           setCameraOn(false);
@@ -46,12 +45,18 @@ const Create = () => {
       {photo && !CameraOn ? (
         <Image source={{ uri: photo }} style={{ flex: 1 }} />
       ) : (
+        <></>
+      )}
+      {CameraOn && CameraPermission ? (
         <Camera style={{ flex: 1 }} type={CameraType.back} ref={cameraRef} />
+      ) : (
+        <></>
       )}
       {!CameraOn ? (
         <Button
           title="Open camera"
           onPress={() => {
+            console.log(CameraOn);
             setCameraOn(true), requestCameraPermission;
           }}
         />
@@ -60,7 +65,7 @@ const Create = () => {
           title="Take Picture"
           onPress={async () => {
             await takePicture();
-            setCameraOn(!CameraOn);
+            setCameraOn(false);
           }}
         />
       )}
