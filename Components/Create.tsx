@@ -1,4 +1,5 @@
 import { Camera, CameraType } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
 import { Button, Image, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
@@ -21,7 +22,9 @@ const Create = () => {
     if (cameraRef.current) {
       await cameraRef.current
         .takePictureAsync({ quality: 1, exif: false })
-        .then((photo) => {
+        .then(async (photo) => {
+          console.log(photo.uri);
+          await MediaLibrary.saveToLibraryAsync(photo.uri);
           setPhoto(photo.uri);
           setCameraOn(false);
         });
