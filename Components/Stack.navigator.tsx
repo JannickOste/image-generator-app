@@ -1,18 +1,26 @@
 import * as React from "react";
-import {
-  useNavigation,
-  useRoute,
-  NavigationContainer,
-} from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Constants from "expo-constants";
-const Stack: any = createNativeStackNavigator();
-export const Home = () => {
-  return <></>;
+import Create from "./Create";
+import Home from "./Home";
+import Images from "./Images";
+
+export const HomePage = () => {
+  return (
+    <>
+      <Home />
+    </>
+  );
 };
-export const Create = () => {
-  return <></>;
+export const CreatePage = () => {
+  return (
+    <>
+      <Create />
+    </>
+  );
 };
-export const Images = () => {
-  return <></>;
+export const ImagesPage = () => {
+  return (
+    <>
+      <Images />
+    </>
+  );
 };
