@@ -1,12 +1,14 @@
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import { Button, Image, Text, View } from "react-native";
+import { Button, Image,} from "react-native";
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import {useNavigation} from "@react-navigation/native"
 const Create = () => {
   const [photo, setPhoto] = useState<string | null>(null);
-  const [CameraPermission, requestCameraPermission] =
-    Camera.useCameraPermissions();
+  const [CameraPermission, requestCameraPermission] = Camera.useCameraPermissions();
+  const [CameraOn, setCameraOn] = useState(false);
+  const navigation = useNavigation()
   useEffect(() => {
     (async () => {
       const { status } =
@@ -16,7 +18,6 @@ const Create = () => {
         alert("Sorry, Camera roll permissions are required.");
     })();
   }, []);
-  const [CameraOn, setCameraOn] = useState(false);
   const cameraRef = React.useRef<Camera>(null);
   const takePicture = async () => {
     if (cameraRef.current) {
@@ -72,9 +73,9 @@ const Create = () => {
       <Button title="Gallery" onPress={chooseImg} />
       {photo ? (
         <Button
-          title="Make me some Art!"
+          title="Continue!"
           onPress={() => {
-            console.log("do something with this image");
+            //navigation.replace("EditImage");
           }}
         />
       ) : (
