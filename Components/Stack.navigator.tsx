@@ -24,3 +24,10 @@ export const ImagesPage = () => {
     </>
   );
 };
+  export const EditImage = ()=>{
+    return (
+      <>
+      <EditImage/>
+      </>
+    )
+};
