@@ -1,31 +1,19 @@
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomePage, CreatePage, ImagesPage } from "./Components/Stack.navigator";
-import EditImage from "./Components/EditImage";
-
+import { CreateNavigator } from "./Components/Stack.navigator";
+import Home from "./Components/Home";
+import Images from "./Components/Images";
 export default function App() {
-  
   const Tab = createBottomTabNavigator();
   return (
     <>
-      <NavigationContainer>
+     <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomePage} />
-          <Tab.Screen name="Create" component={CreatePage}  />
-          <Tab.Screen name="Images" component={ImagesPage} />
-          <Tab.Screen name="EditImage" component={EditImage} />
+          <Tab.Screen name="Home" component={Home} />
+          <Tab.Screen name="Create" component={CreateNavigator}  />
+          <Tab.Screen name="Images" component={Images} />
         </Tab.Navigator>
-      </NavigationContainer>
+  </NavigationContainer>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

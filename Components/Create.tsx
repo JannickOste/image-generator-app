@@ -3,12 +3,15 @@ import * as MediaLibrary from "expo-media-library";
 import { Button, Image,} from "react-native";
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {useNavigation} from "@react-navigation/native"
+import { RootStackParamList } from "./Stack.navigator";
 const Create = () => {
   const [photo, setPhoto] = useState<string | null>(null);
   const [CameraPermission, requestCameraPermission] = Camera.useCameraPermissions();
   const [CameraOn, setCameraOn] = useState(false);
-  const navigation = useNavigation()
+  //navigation won't work with props unless i specify type of navigation prop
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   useEffect(() => {
     (async () => {
       const { status } =
@@ -44,7 +47,7 @@ const Create = () => {
   return (
     <>
       {photo && !CameraOn ? (
-        <Image source={{ uri: photo }} style={{ flex: 1 }} />
+        <Image source={{ uri: photo }} style={{ flex: 1 ,width:"80%" ,height:"70%"}} />
       ) : (
         <></>
       )}
@@ -75,7 +78,7 @@ const Create = () => {
         <Button
           title="Continue!"
           onPress={() => {
-            //navigation.replace("EditImage");
+            navigation.navigate("EditImage",{uri:photo});
           }}
         />
       ) : (

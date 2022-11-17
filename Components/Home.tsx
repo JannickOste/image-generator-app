@@ -1,4 +1,14 @@
+
+//import EditImage from "./EditImage";
+
+
+
 const Home = () => {
-  return <></>;
+
+  return (
+  <>  
+  
+  </>
+  );
 };
 export default Home;
