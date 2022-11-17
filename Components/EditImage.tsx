@@ -22,8 +22,8 @@ const EditImage  =(()=>{
         height={500}
         color="black"
         thickness={15}
-        opacity={0.7}
-        style={{backgroundColor:'white',}}
+        opacity={0.5}
+        style={{backgroundColor:'rgba(52, 52, 52, 0.0)',}}
         
     />
     </ImageBackground>  
