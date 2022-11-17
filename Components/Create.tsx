@@ -1,7 +1,7 @@
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { Button, Image,} from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {useNavigation} from "@react-navigation/native"
@@ -36,8 +36,8 @@ const Create = () => {
   const chooseImg = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      aspect: [3, 3],
-      quality: 1,
+      aspect: [2, 2],
+      quality: 0.2,
       allowsEditing: true,
     });
     if (!result.cancelled) {
@@ -47,7 +47,7 @@ const Create = () => {
   return (
     <>
       {photo && !CameraOn ? (
-        <Image source={{ uri: photo }} style={{ flex: 1 ,width:"80%" ,height:"70%"}} />
+        <Image source={{ uri: photo }} style={{ flex: 1 ,resizeMode:"contain" ,justifyContent:"center"}} />
       ) : (
         <></>
       )}
