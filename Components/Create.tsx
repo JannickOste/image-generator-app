@@ -1,11 +1,15 @@
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import { Button, Image,} from "react-native";
-import React, { Fragment, useEffect, useState } from "react";
+import { Button, Image, StyleSheet, Touchable, TouchableOpacity, View} from "react-native";
+import React, { Fragment, useEffect, useState, } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {useNavigation} from "@react-navigation/native"
 import { RootStackParamList } from "./Stack.navigator";
+import { SafeAreaView } from "react-navigation";
+import Constants from 'expo-constants';
+import { PressableOpacity } from "react-native-pressable-opacity";
+
 const Create = () => {
   const [photo, setPhoto] = useState<string | null>(null);
   const [CameraPermission, requestCameraPermission] = Camera.useCameraPermissions();
@@ -46,8 +50,9 @@ const Create = () => {
   };
   return (
     <>
+    <SafeAreaView>
       {photo && !CameraOn ? (
-        <Image source={{ uri: photo }} style={{ flex: 1 ,resizeMode:"contain" ,justifyContent:"center"}} />
+        <Image source={{ uri: photo }} resizeMode="contain"  style={{ flex: 1 ,resizeMode:"contain" ,justifyContent:"center", width:"70%"}} />
       ) : (
         <></>
       )}
@@ -56,7 +61,10 @@ const Create = () => {
       ) : (
         <></>
       )}
+
+      <View style={styles.buttonContainer}>
       {!CameraOn ? (
+        <TouchableOpacity style={styles.button}>
         <Button
           title="Open camera"
           onPress={() => {
@@ -64,7 +72,9 @@ const Create = () => {
             setCameraOn(true), requestCameraPermission;
           }}
         />
+        </TouchableOpacity>
       ) : (
+        <TouchableOpacity style={styles.button}>
         <Button
           title="Take Picture"
           onPress={async () => {
@@ -72,19 +82,46 @@ const Create = () => {
             setCameraOn(false);
           }}
         />
+        </TouchableOpacity>
       )}
-      <Button title="Gallery" onPress={chooseImg} />
+       <PressableOpacity style={styles.button}><Button title="Gallery" onPress={chooseImg} /></PressableOpacity>
       {photo ? (
-        <Button
+        <TouchableOpacity style={styles.button}>
+        <Button 
           title="Continue!"
           onPress={() => {
             navigation.navigate("EditImage",{uri:photo});
           }}
         />
+        </TouchableOpacity>
       ) : (
         <></>
       )}
+      </View>
+
+      </SafeAreaView>
+      
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  button:{
+    width:300,
+    height:50,
+    borderRadius:50,
+    fontSize:25,
+    margin:10
+  },
+  buttonContainer:{
+    padding:10,
+    top:1300,
+    width:'80%',
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+    display:"flex"
+  }
+}
+)
 export default Create;
