@@ -2,6 +2,7 @@ import { Camera, CameraType } from "expo-camera";
 import { Button, Image, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+
 const Create = () => {
   const [photo, setPhoto] = useState<string | null>(null);
   const [CameraPermission, requestCameraPermission] =

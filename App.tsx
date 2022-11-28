@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomePage, CreatePage, ImagesPage } from "./Components/Stack.navigator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
+
 export default function App() {
   const Tab = createBottomTabNavigator();
   return (
