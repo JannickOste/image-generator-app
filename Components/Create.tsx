@@ -1,13 +1,12 @@
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { Image, StyleSheet, TouchableOpacity, View,Text} from "react-native";
-import React, {useEffect, useState,useRef } from "react";
+import React, {useEffect, useState,useRef,  } from "react";
 import {launchImageLibraryAsync,MediaTypeOptions, requestMediaLibraryPermissionsAsync} from "expo-image-picker";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {useNavigation} from "@react-navigation/native"
 import { RootStackParamList } from "./Stack.navigator";
 import { SafeAreaView } from "react-navigation";
-
 const Create = () => {
   const [photo, setPhoto] = useState<string | null>(null);
   const [CameraPermission, requestCameraPermission] = Camera.useCameraPermissions();
@@ -38,20 +37,20 @@ const Create = () => {
   const chooseImg = async () => {
     let result = await launchImageLibraryAsync({
       mediaTypes: MediaTypeOptions.Images,
-      aspect: [2, 2],
-      quality: 0.2,
+      quality: 0.5,
       allowsEditing: true,
     });
     if (!result.cancelled) {
       setPhoto(result.uri);
+      console.log(photo)
     }
   };
   return (
     <>
-    <SafeAreaView>
+    <SafeAreaView style={styles.viewArea}>
       <View style={styles.ImageContainer}>
       {photo ? (
-        <Image source={{ uri: photo }} />
+        <Image source={{ uri: photo }}  style={styles.imageStyle}/>
       ) : (
         <Text style={styles.imageText}>No image selected</Text>
       )}
@@ -116,26 +115,39 @@ flex:1
     fontWeight:'bold',
     letterSpacing:0.25,
     color:'white',
-    minWidth:80,
+    minWidth:"20%",
+    maxWidth:"30%",
+    textAlign:"center"
   },
   buttonContainer:{
-    padding:10,
-    top:"250%",
+    top:"70%",
     justifyContent:"center",
     alignItems:"center",
     display:"flex"
   },
   ImageContainer:{
-    width:"80%",
+    marginTop:"20%",
+    maxWidth:"90%",
+    minWidth:"60%",
+    minHeight:"20%",
+    maxHeight:"40%",
     justifyContent:"center",
-    alignItems:"center"
-    
+    alignItems:"center",
+    alignContent:"center",
   },
   imageStyle:{
-    flex:1,
-    resizeMode:'contain',
-    justifyContent:"center",
-    width:"70%",
+    borderColor:"rgba(0,0,0,0.4)",
+    borderWidth:7,
+    borderRadius:14,
+    backgroundColor:"black",
+    borderStyle:"solid",
+    resizeMode:"contain",
+    minHeight:"70%",
+    minWidth:"90%",
+    maxHeight:"100%",
+    maxWidth:"80%",
+    paddingTop:"60%",
+
   },
   imageText:{
     marginTop:50,
@@ -143,7 +155,13 @@ flex:1
     fontSize:30,
     fontWeight:"bold",
     letterSpacing:0.25,
-    lineHeight:50
+    lineHeight:50,
+    textAlign:"center",
+    display:"flex",
+  },
+  viewArea:{
+    alignContent:"center",
+    alignItems:"center",
   }
   
 }
