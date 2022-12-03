@@ -7,6 +7,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {useNavigation} from "@react-navigation/native"
 import { RootStackParamList } from "./Stack.navigator";
 import { SafeAreaView } from "react-navigation";
+
 const Create = () => {
   const [photo, setPhoto] = useState<string | null>(null);
   const [CameraPermission, requestCameraPermission] = Camera.useCameraPermissions();
