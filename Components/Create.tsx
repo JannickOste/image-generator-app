@@ -1,14 +1,12 @@
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import { Button, Image, StyleSheet, Touchable, TouchableOpacity, View} from "react-native";
-import React, { Fragment, useEffect, useState, } from "react";
-import * as ImagePicker from "expo-image-picker";
+import { Image, StyleSheet, TouchableOpacity, View,Text} from "react-native";
+import React, {useEffect, useState,useRef } from "react";
+import {launchImageLibraryAsync,MediaTypeOptions, requestMediaLibraryPermissionsAsync} from "expo-image-picker";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {useNavigation} from "@react-navigation/native"
 import { RootStackParamList } from "./Stack.navigator";
 import { SafeAreaView } from "react-navigation";
-import Constants from 'expo-constants';
-import { PressableOpacity } from "react-native-pressable-opacity";
 
 const Create = () => {
   const [photo, setPhoto] = useState<string | null>(null);
@@ -19,13 +17,13 @@ const Create = () => {
   useEffect(() => {
     (async () => {
       const { status } =
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
+        await requestMediaLibraryPermissionsAsync();
       requestCameraPermission;
       if (status !== "granted")
         alert("Sorry, Camera roll permissions are required.");
     })();
   }, []);
-  const cameraRef = React.useRef<Camera>(null);
+  const cameraRef = useRef<Camera>(null);
   const takePicture = async () => {
     if (cameraRef.current) {
       await cameraRef.current
@@ -38,8 +36,8 @@ const Create = () => {
     }
   };
   const chooseImg = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    let result = await launchImageLibraryAsync({
+      mediaTypes: MediaTypeOptions.Images,
       aspect: [2, 2],
       quality: 0.2,
       allowsEditing: true,
@@ -51,54 +49,47 @@ const Create = () => {
   return (
     <>
     <SafeAreaView>
-      {photo && !CameraOn ? (
-        <Image source={{ uri: photo }} resizeMode="contain"  style={{ flex: 1 ,resizeMode:"contain" ,justifyContent:"center", width:"70%"}} />
+      <View style={styles.ImageContainer}>
+      {photo ? (
+        <Image source={{ uri: photo }} />
       ) : (
-        <></>
+        <Text style={styles.imageText}>No image selected</Text>
       )}
       {CameraOn && CameraPermission ? (
-        <Camera style={{ flex: 1 }} type={CameraType.back} ref={cameraRef} />
+        <Camera style={styles.camera} type={CameraType.back} ref={cameraRef} />
       ) : (
         <></>
       )}
-
+      </View>
       <View style={styles.buttonContainer}>
       {!CameraOn ? (
-        <TouchableOpacity style={styles.button}>
-        <Button
-          title="Open camera"
-          onPress={() => {
-            console.log(CameraOn);
-            setCameraOn(true), requestCameraPermission;
-          }}
-        />
+        <TouchableOpacity style={styles.button}onPress={() => {
+          console.log(CameraOn);
+          setCameraOn(true), requestCameraPermission;
+        }}>
+        <Text style={styles.buttonText}>Open camera</Text>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity style={styles.button}>
-        <Button
-          title="Take Picture"
-          onPress={async () => {
-            await takePicture();
-            setCameraOn(false);
-          }}
-        />
+        <TouchableOpacity style={styles.button} onPress={async () => {
+          await takePicture();
+          setCameraOn(false);
+        }}>
+        <Text style={styles.buttonText}>"Take Picture"</Text>
         </TouchableOpacity>
       )}
-       <PressableOpacity style={styles.button}><Button title="Gallery" onPress={chooseImg} /></PressableOpacity>
+      <TouchableOpacity style={styles.button} onPress={chooseImg}>
+      <Text style={styles.buttonText}>Gallery</Text>
+      </TouchableOpacity>
       {photo ? (
-        <TouchableOpacity style={styles.button}>
-        <Button 
-          title="Continue!"
-          onPress={() => {
-            navigation.navigate("EditImage",{uri:photo});
-          }}
-        />
+        <TouchableOpacity style={styles.button} onPress={() => {
+          navigation.navigate("EditImage",{uri:photo});
+        }}>
+          <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
       ) : (
         <></>
       )}
       </View>
-
       </SafeAreaView>
       
     </>
@@ -106,22 +97,55 @@ const Create = () => {
 };
 
 const styles = StyleSheet.create({
+  camera:{
+flex:1
+  },
   button:{
-    width:300,
-    height:50,
-    borderRadius:50,
-    fontSize:25,
-    margin:10
+    alignItems:"center",
+    justifyContent:"center",
+    paddingVertical:12,
+    paddingHorizontal:32,
+    borderRadius:4,
+    elevation:3,
+    backgroundColor:"blue", 
+    marginTop:10
+  },
+  buttonText:{
+    fontSize:16,
+    lineHeight:21,
+    fontWeight:'bold',
+    letterSpacing:0.25,
+    color:'white',
+    minWidth:80,
   },
   buttonContainer:{
     padding:10,
-    top:1300,
-    width:'80%',
-    flex:1,
+    top:"250%",
     justifyContent:"center",
     alignItems:"center",
     display:"flex"
+  },
+  ImageContainer:{
+    width:"80%",
+    justifyContent:"center",
+    alignItems:"center"
+    
+  },
+  imageStyle:{
+    flex:1,
+    resizeMode:'contain',
+    justifyContent:"center",
+    width:"70%",
+  },
+  imageText:{
+    marginTop:50,
+    color:"rgba(0,0,0,0.5)",
+    fontSize:30,
+    fontWeight:"bold",
+    letterSpacing:0.25,
+    lineHeight:50
   }
+  
 }
 )
 export default Create;
