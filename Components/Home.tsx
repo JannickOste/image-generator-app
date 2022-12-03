@@ -17,7 +17,6 @@ const Home = () => {
       <Text style={styles.textField}>Welcome to the image-generator-app!</Text>
       <Text style={styles.textField}>Please read the usage case policy from OpenAi first before proceeding.</Text>
       <Link to={policiesLink} style={styles.linkfield}>OpenAi Policies</Link>
-  
     </View>
   </>
   );

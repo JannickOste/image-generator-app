@@ -82,7 +82,7 @@ const Create = () => {
       </TouchableOpacity>
       {photo ? (
         <TouchableOpacity style={styles.button} onPress={() => {
-          navigation.navigate("EditImage",{uri:photo});
+          navigation.navigate("editimage",{width:255,height:255});
         }}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
