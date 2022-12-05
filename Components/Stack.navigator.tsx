@@ -16,8 +16,8 @@ export const CreateNavigator = ()=>{
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
+        <Stack.Screen name="create image" component={Create}/>
         <Stack.Screen name="Images" component={Images}/>
-        <Stack.Screen name="editimage">{() => <ImageCreator width={255} height={255}/>}</Stack.Screen>
     </Stack.Navigator>
     )
 
@@ -38,7 +38,6 @@ export const ImagesNavigator=()=>{
   return (
         <Stack.Navigator>
           <Stack.Screen name="History" component={History}/>
-          <Stack.Screen name="Home" component={Home}/>
         </Stack.Navigator>
 
   )
