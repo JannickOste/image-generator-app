@@ -27,15 +27,18 @@ const styles = StyleSheet.create({
         color: "#555"
     },
     button: {
-        backgroundColor: "#2596be",
-        flex: 1
+        backgroundColor: "rgba(0,100,100,0.7)",
+        flex: 1,
     },
     buttonText: {
-        padding: 20,    
+        padding: 10,
+        paddingTop:20,    
         alignSelf: "center",
         justifyContent: "center",
         marginVertical: "auto", 
-        color: "#fff"
+        color: "#fff",
+        fontSize:15,
+        fontWeight:"bold"
     }
 });
 
