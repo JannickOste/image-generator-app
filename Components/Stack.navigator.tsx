@@ -1,7 +1,8 @@
 import * as React from "react";
-import Create from "./Create";
-import Home from "./Home";
-import Images from "./Images";
+import Create from "./pages/Create";
+import Home from "./pages/Home";
+import Images from "./pages/Images";
+import History from "./pages/History";
 
 export const HomePage = () => {
   return (
@@ -24,3 +25,5 @@ export const ImagesPage = () => {
     </>
   );
 };
+
+export const HistoryPage = () => (<History />)

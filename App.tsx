@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomePage, CreatePage, ImagesPage } from "./Components/Stack.navigator";
+import { HomePage, CreatePage, ImagesPage, HistoryPage } from "./Components/Stack.navigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
@@ -15,6 +15,7 @@ export default function App() {
           <Tab.Screen name="Home" component={HomePage} />
           <Tab.Screen name="Create" component={CreatePage} />
           <Tab.Screen name="Images" component={ImagesPage} />
+          <Tab.Screen name="History" component={HistoryPage} />
         </Tab.Navigator>
       </NavigationContainer>
     </>

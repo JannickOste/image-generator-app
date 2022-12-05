@@ -1,10 +1,11 @@
 import {Configuration, OpenAIApi } from "openai";
+import {Axios} from "axios";
 
 class OpenAPI
 {
     private static singleton: OpenAPI | undefined;
     public static get Singleton() { return this.singleton ? this.singleton : (this.singleton = new OpenAPI({
-        apiKey:"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"
+        apiKey:"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"
     }))}
 
     private readonly openai: OpenAIApi;
@@ -15,13 +16,15 @@ class OpenAPI
     }
 
     public fetchImageByText = async(searchQuery: string, imageSourceSetter: (uri: string) => void) => {
-        const response = await this.openai.createImage({
-            prompt: searchQuery,
-            n: 1,
-            size: "512x512",
-        });
-        
-        imageSourceSetter(response.data.data[0]?.url as string)
+        const payload = {
+            "prompt": searchQuery,
+            "n": 1,
+            "size": "512x512",
+            response_format: "url"
+        };
+
+        const response = await this.openai.createImage(payload as any);
+        imageSourceSetter(response.data.data[0]?.url as string);
     }
 }
 
