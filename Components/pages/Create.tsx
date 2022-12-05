@@ -5,7 +5,7 @@ import React, {useEffect, useState,useRef,  } from "react";
 import {launchImageLibraryAsync,MediaTypeOptions, requestMediaLibraryPermissionsAsync} from "expo-image-picker";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {useNavigation} from "@react-navigation/native"
-import { RootStackParamList } from "./Stack.navigator";
+import { RootStackParamList } from "../Stack.navigator";
 import { SafeAreaView } from "react-navigation";
 
 const Create = () => {
@@ -107,7 +107,7 @@ flex:1
     paddingHorizontal:32,
     borderRadius:4,
     elevation:3,
-    backgroundColor:"blue", 
+    backgroundColor:"rgba(0,100,100,0.7)", 
     marginTop:10
   },
   buttonText:{
