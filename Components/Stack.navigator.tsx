@@ -1,16 +1,15 @@
 import * as React from "react";
-import Create from "./Create";
-//import EditImage from "./EditImage";
-//  EditImage:{uri:string}|undefined;
 export type RootStackParamList = {
   editimage:APIImageProps
 }
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./Home";
-import Images from "./Images";
+import Create from "./pages/Create";
+import Home from "./pages/Home";
+import Images from "./pages/Images";
+import History from "./pages/History";
 import ImageCreator, { APIImageProps } from "./ImageCreator";
-export const CreateNavigator = ()=>{
-  const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
+  export const HomePage = () => {
   return (
     <Stack.Navigator>
         <Stack.Screen name="chooseimage" component={Create}/>
@@ -38,4 +37,8 @@ export const ImagesNavigator=()=>{
         </Stack.Navigator>
 
   )
+}
+export const HistoryPage = () =>{
+  return (<History />)
+
 }

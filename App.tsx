@@ -2,8 +2,9 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CreateNavigator } from "./Components/Stack.navigator";
-import Home from "./Components/Home";
-import Images from "./Components/Images";
+import Home from "./Components/pages/Home";
+import Images from "./Components/pages/Images";
+import { HomePage, CreatePage, ImagesPage, HistoryPage } from "./Components/Stack.navigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 export default function App() {
