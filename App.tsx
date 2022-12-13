@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CreateNavigator, HomeNavigator, ImagesNavigator } from "./Components/Stack.navigator";
+import { CreateNavigator, GenerateNavigator, HistoryNavigator, HomeNavigator } from "./Components/Stack.navigator";
 import Home from "./Components/pages/Home";
 import Images from "./Components/pages/Images";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -25,7 +25,15 @@ export default function App() {
                   size={30}
                   color="rgba(0,100,100,0.7)"/>),
           }} />
-          <Tab.Screen name="All images" component={ImagesNavigator} options={{
+          <Tab.Screen name="Generate" component={GenerateNavigator} options={{
+            tabBarIcon:()=>(
+              <MaterialCommunityIcons
+                name="image"
+                size={30}
+                color="rgba(0,100,100,0.7)"/>),
+            }}/>
+            
+          <Tab.Screen name="History" component={HistoryNavigator} options={{
             tabBarIcon:()=>(
               <MaterialCommunityIcons
                 name="image"
