@@ -54,7 +54,7 @@ export const ImageCreator = (props: APIImageProps) => {
     }
 
     return (
-        <ScrollView style={{display:"flex", width: "100%"}}>
+        <ScrollView style={{display:"flex", width: "100%",marginTop:60}}>
             <SearchBox placeholder="What do you wish to generate?"  onSubmit={OnSubmitEvent} />
             <Image 
                 source={{uri: state.currentImage, width: props.width, height: props.height ? props.height : props.width}}

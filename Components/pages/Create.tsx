@@ -7,6 +7,10 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {useNavigation} from "@react-navigation/native"
 import { RootStackParamList } from "../Stack.navigator";
 import { SafeAreaView } from "react-navigation";
+import Constants from "expo-constants";
+import WavyHeader from "../wavyHeader";
+import { LinearGradient } from "expo-linear-gradient";
+import CustomHeader from "../header";
 
 const Create = () => {
   const [photo, setPhoto] = useState<string | null>(null);
@@ -48,6 +52,13 @@ const Create = () => {
   };
   return (
     <>
+    <WavyHeader/>
+    <LinearGradient
+      style={styles.gradient}
+      colors={["rgba(0,100,100,0.3)","rgba(0,100,100,0.7)"]}
+      start={{x:0,y:0.5}}
+      end={{x:1.3,y:1}}>
+        <CustomHeader title="Select Image" />
     <SafeAreaView style={styles.viewArea}>
       <View style={styles.ImageContainer}>
       {photo ? (
@@ -82,7 +93,7 @@ const Create = () => {
       </TouchableOpacity>
       {photo ? (
         <TouchableOpacity style={styles.button} onPress={() => {
-          navigation.navigate("Images");
+          navigation.navigate("Generate");
         }}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
@@ -91,7 +102,7 @@ const Create = () => {
       )}
       </View>
       </SafeAreaView>
-      
+      </LinearGradient>
     </>
   );
 };
@@ -108,7 +119,7 @@ flex:1
     borderRadius:4,
     elevation:3,
     backgroundColor:"rgba(0,100,100,0.7)", 
-    marginTop:10
+    marginTop:8
   },
   buttonText:{
     fontSize:16,
@@ -121,13 +132,13 @@ flex:1
     textAlign:"center"
   },
   buttonContainer:{
-    top:"70%",
+    top:"20%",
     justifyContent:"center",
     alignItems:"center",
     display:"flex"
   },
   ImageContainer:{
-    marginTop:"20%",
+    marginTop:"25%",
     maxWidth:"90%",
     minWidth:"60%",
     minHeight:"20%",
@@ -161,9 +172,18 @@ flex:1
     display:"flex",
   },
   viewArea:{
+    marginTop:100,
+    flex:1,
     alignContent:"center",
     alignItems:"center",
-  }
+  },
+  gradient: {
+    flex:2,
+    justifyContent:"center",
+    alignItems:"center",
+    paddingTop:Constants.statusBarHeight,
+    padding:0,
+  },
   
 }
 )
