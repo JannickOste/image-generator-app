@@ -1,10 +1,9 @@
 
-import {View, Text, StyleSheet, Linking, Dimensions,} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import * as React from 'react'
 import Constants from 'expo-constants';
 import ButtonUrl from '../ButtonUrl';
 import {LinearGradient} from "expo-linear-gradient"
-import { StatusBar } from 'react-native';
 import WavyHeader from '../wavyHeader';
 import CustomHeader from '../header';
 const policiesLink:string = "https://beta.openai.com/docs/usage-policies"
