@@ -29,11 +29,21 @@ export const HomeNavigator=()=>{
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home}/>
         <Stack.Screen name="Create" component={Create}/>
-        <Stack.Screen name="Images" component={Images}/>
+        <Stack.Screen name="Images" component={History}/>
+        <Stack.Screen name="Generate" component={Images}/>
       </Stack.Navigator>
   )
 }
-export const ImagesNavigator=()=>{
+export const GenerateNavigator=()=>{
+  const Stack = createNativeStackNavigator();
+  return (
+        <Stack.Navigator>
+          <Stack.Screen name="Generate" component={Images}/>
+        </Stack.Navigator>
+
+  )
+}
+export const HistoryNavigator=()=>{
   const Stack = createNativeStackNavigator();
   return (
         <Stack.Navigator>
