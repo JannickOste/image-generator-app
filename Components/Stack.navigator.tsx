@@ -5,7 +5,8 @@ import Create from "./pages/Create";
 import Home from "./pages/Home";
 import Images from "./pages/Images";
 import History from "./pages/History";
-import ImageCreator, { APIImageProps } from "./ImageCreator";
+import ImageGenerator, { APIImageProps } from "./ImageGenerator";
+import EditImage from "./EditImage";
 
 
 
@@ -17,7 +18,7 @@ export const CreateNavigator = ()=>{
   return (
     <Stack.Navigator>
         <Stack.Screen name="create image" component={Create}/>
-        <Stack.Screen name="Images" component={Images}/>
+        <Stack.Screen name="Images" component={EditImage}/>
     </Stack.Navigator>
     )
 
@@ -38,7 +39,7 @@ export const GenerateNavigator=()=>{
   const Stack = createNativeStackNavigator();
   return (
         <Stack.Navigator>
-          <Stack.Screen name="Generate" component={Images}/>
+          <Stack.Screen name="GenerateImage" component={Images}/>
         </Stack.Navigator>
 
   )

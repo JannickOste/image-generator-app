@@ -1,7 +1,7 @@
-import ImageCreator from "../ImageCreator"
+import ImageGenerator from "../ImageGenerator"
 const Images = () => (
     <>
-        <ImageCreator width={512} />
+        <ImageGenerator width={512} />
     </>
 )
 export default Images;

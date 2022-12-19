@@ -19,7 +19,7 @@ export type APIImageProps = {
 }
 
 
-export const ImageCreator = (props: APIImageProps) => {
+export const ImageGenerator = (props: APIImageProps) => {
     const [state, setstate] = useState({currentImage: "none", loading: false});
      
     const OnSubmitEvent = async(searchQuery:string) => {
@@ -66,4 +66,4 @@ export const ImageCreator = (props: APIImageProps) => {
     )
 }
 
-export default ImageCreator;
+export default ImageGenerator;
