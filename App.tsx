@@ -9,6 +9,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StatusBar, View ,Text, Dimensions} from 'react-native';
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
+const defaultColor:string="rgb(150,150,230)";
 export default function App() {
   const Tab = createBottomTabNavigator();
   const theme = {
@@ -31,14 +32,14 @@ export default function App() {
               <MaterialCommunityIcons 
                 name="home" 
                 size={30} 
-                color="rgba(0,100,100,0.7)"/>),
+                color={defaultColor}/>),
                 headerShown:false}} />
           <Tab.Screen name="Create" component={CreateNavigator} options={{
             tabBarIcon:()=>(
                 <MaterialCommunityIcons
                   name="camera"
                   size={30}
-                  color="rgba(0,100,100,0.7)"/>),
+                  color={defaultColor}/>),
                   headerShown:false
           }} />
           <Tab.Screen name="Generate" component={GenerateNavigator} options={{
@@ -46,7 +47,7 @@ export default function App() {
               <MaterialCommunityIcons
                 name="image"
                 size={30}
-                color="rgba(0,100,100,0.7)"/>),
+                color={defaultColor}/>),
                 headerShown:false
             }}/>
             
@@ -55,7 +56,7 @@ export default function App() {
               <MaterialCommunityIcons
                 name="image"
                 size={30}
-                color="rgba(0,100,100,0.7)"/>),
+                color={defaultColor}/>),
                 headerShown:false
             }}/>
         </Tab.Navigator>

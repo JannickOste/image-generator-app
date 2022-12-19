@@ -13,10 +13,10 @@ const Home = () => {
 
   return (
   <> 
-    <WavyHeader/>
+    <WavyHeader color="rgb(150,150,230)"/>
     <LinearGradient
       style={styles.gradient}
-      colors={["rgba(0,100,100,0.3)","rgba(0,100,100,0.7)"]}
+      colors={["rgba(150,150,230,0.3)","rgba(150,100,230,0.7)"]}
       start={{x:0,y:0.4}}
       end={{x:2,y:1}}>
       <CustomHeader title="Home"/>
