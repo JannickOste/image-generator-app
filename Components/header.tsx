@@ -15,8 +15,9 @@ export default function  CustomHeader({title="hello wolrd."}:CustomHeaderProps){
 const styles = StyleSheet.create({
     
   headerContainer:{
-    marginTop:30,
+    marginTop:10,
     marginHorizontal:10,
+    marginBottom:50,
   }, 
   header:{
     fontSize:30,
