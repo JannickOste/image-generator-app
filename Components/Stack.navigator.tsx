@@ -18,7 +18,7 @@ export const CreateNavigator = ()=>{
   return (
     <Stack.Navigator>
         <Stack.Screen name="create image" component={Create} options={{headerShown:false}}/>
-        <Stack.Screen name="Images" component={Images} options={{headerShown:false}}/>
+        <Stack.Screen name="EditImage" component={EditImage} options={{headerShown:false}}/>
     </Stack.Navigator>
     )
 
