@@ -1,20 +1,31 @@
 
-import {View, Text, StyleSheet, Linking,} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import * as React from 'react'
 import Constants from 'expo-constants';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import ButtonUrl from '../ButtonUrl';
+import {LinearGradient} from "expo-linear-gradient"
+import WavyHeader from '../wavyHeader';
+import CustomHeader from '../header';
 const policiesLink:string = "https://beta.openai.com/docs/usage-policies"
 
    
 const Home = () => {
 
   return (
-  <>  
+  <> 
+    <WavyHeader/>
+    <LinearGradient
+      style={styles.gradient}
+      colors={["rgba(0,100,100,0.3)","rgba(0,100,100,0.7)"]}
+      start={{x:0,y:0.4}}
+      end={{x:2,y:1}}>
+      <CustomHeader title="Home"/>
     <View style={styles.container}>
       <Text style={styles.textField}>Welcome to the image-generator-app!</Text>
       <Text style={styles.textField}>Please read the policies from OpenAi first before proceeding.</Text>
-      <TouchableOpacity style={styles.touchable} onPress={() => Linking.openURL('https://google.com')}><Text style={styles.touchableText}>Policies</Text></TouchableOpacity>
-    </View>
+      <ButtonUrl url={policiesLink}/>
+      </View>
+      </LinearGradient>
   </>
   );
 };
@@ -33,25 +44,12 @@ const styles = StyleSheet.create({
     textAlign:'center',
     textDecoration:"none"
   },
-  linkfield:{
-    margin:25,
-    fontSize:30,
-    fontWeight:'bold', 
-    textAlign:'center',
-    textDecoration:"none",
-    color:"blue"
-  },
-  touchable:{
-    backgroundColor:"rgba(0,100,100,0.7)",
-    borderRadius:7,
-    width:120,
-    height:30,
+  gradient: {
+    flex:2,
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    paddingTop:Constants.statusBarHeight,
+    padding:0
   },
-  touchableText:{
-    fontSize:20,
-    color:"#ffffff"
-  }
 })
 export default Home;

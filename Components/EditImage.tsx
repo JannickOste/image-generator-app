@@ -1,10 +1,15 @@
 import React,{  useRef, useState} from 'react';
-import {Button, ImageBackground, TextInput} from "react-native"
+import {Button, ImageBackground, TextInput,StyleSheet} from "react-native"
 import {Canvas,CanvasRef, PathType,DrawingTool} from '@benjeau/react-native-draw';
 import { RouteProp, useRoute } from '@react-navigation/native';
 interface EditImageProps {
     uri:string
 }
+const styles = StyleSheet.create({
+    canvas:{
+        backgroundColor:'rgba(52, 52, 52, 0.0)'
+    }
+})
 const EditImage  =(()=>{
     const [paths,setPaths] = useState<PathType[]>([]);
     const [prompt, setPrompt] = useState<string>("");
@@ -32,7 +37,7 @@ const EditImage  =(()=>{
         thickness={15}
         tool={DrawingTool.Brush}
         opacity={1}
-        style={{backgroundColor:'rgba(52, 52, 52, 0.0)',}}
+        style={styles.canvas}
         onPathsChange={(event)=>{addPath(event)}}
         
     />

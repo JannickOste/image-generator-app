@@ -28,10 +28,10 @@ export const HomeNavigator=()=>{
   const Stack = createNativeStackNavigator();
   return (
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home}/>
-        <Stack.Screen name="Create" component={Create}/>
-        <Stack.Screen name="Images" component={History}/>
-        <Stack.Screen name="Generate" component={Images}/>
+        <Stack.Screen name="Home" component={Home} options={{headerShown:false}}/>
+        <Stack.Screen name="Create" component={Create} options={{headerShown:false}}/>
+        <Stack.Screen name="Images" component={History} options={{headerShown:false}}/>
+        <Stack.Screen name="Generate" component={Images} options={{headerShown:false}}/>
       </Stack.Navigator>
   )
 }
@@ -39,7 +39,7 @@ export const GenerateNavigator=()=>{
   const Stack = createNativeStackNavigator();
   return (
         <Stack.Navigator>
-          <Stack.Screen name="GenerateImage" component={Images}/>
+          <Stack.Screen name="GenerateImage" component={Images} options={{headerShown:false}}/>
         </Stack.Navigator>
 
   )
@@ -48,7 +48,7 @@ export const HistoryNavigator=()=>{
   const Stack = createNativeStackNavigator();
   return (
         <Stack.Navigator>
-          <Stack.Screen name="History" component={History}/>
+          <Stack.Screen name="History" component={History} options={{headerShown:false}}/>
         </Stack.Navigator>
 
   )
