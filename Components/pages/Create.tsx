@@ -93,7 +93,7 @@ const Create = () => {
       </TouchableOpacity>
       {photo ? (
         <TouchableOpacity style={styles.button} onPress={() => {
-          navigation.navigate("Generate");
+          navigation.navigate("Images", {uri: "https://i0.wp.com/marketbusinessnews.com/wp-content/uploads/2018/04/Ullage.jpg?fit=776%2C659&ssl=1"});
         }}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>

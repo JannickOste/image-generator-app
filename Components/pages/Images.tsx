@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import CustomHeader from "../header";
-import ImageCreator from "../ImageCreator"
+import ImageGenerator from "../ImageGenerator"
 import WavyHeader from "../wavyHeader";
 import {StyleSheet} from "react-native"
 import Constants from "expo-constants";
@@ -13,7 +13,7 @@ const Images = () => (
         start={{x:0,y:0.5}}
         end={{x:1.3,y:1}}>
         <CustomHeader title="Generate"/>
-        <ImageCreator width={512} />
+        <ImageGenerator width={512} />
         </LinearGradient>
     </>
 )

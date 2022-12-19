@@ -5,7 +5,8 @@ import Create from "./pages/Create";
 import Home from "./pages/Home";
 import Images from "./pages/Images";
 import History from "./pages/History";
-import ImageCreator, { APIImageProps } from "./ImageCreator";
+import ImageGenerator, { APIImageProps } from "./ImageGenerator";
+import EditImage from "./EditImage";
 
 
 
