@@ -18,10 +18,12 @@ const styles = StyleSheet.create({
     },
     imageContainer:{
         marginHorizontal: "auto",
+        alignItems:"center",
+        width:"50%",
     },
     image:{
         borderRadius:15, 
-        zIndex:1
+        zIndex:1,
     },
     historyContainer:{
         color: "black", 
@@ -32,7 +34,9 @@ const styles = StyleSheet.create({
         zIndex:0,
         top:-10,
         paddingTop:11,
-        marginBottom:"5%"
+        marginBottom:"5%",
+        paddingHorizontal:"auto",
+        width:"100%"
     },
     button:{
         backgroundColor:"rgba(200,100,200,1)",
