@@ -39,7 +39,7 @@ export const GenerateNavigator=()=>{
   const Stack = createNativeStackNavigator();
   return (
         <Stack.Navigator>
-          <Stack.Screen name="Generate" component={Images} options={{headerShown:false}}/>
+          <Stack.Screen name="Generate_Images" component={Images} options={{headerShown:false}}/>
         </Stack.Navigator>
 
   )
@@ -48,7 +48,7 @@ export const HistoryNavigator=()=>{
   const Stack = createNativeStackNavigator();
   return (
         <Stack.Navigator>
-          <Stack.Screen name="History" component={History} options={{headerShown:false}}/>
+          <Stack.Screen name="History_Images" component={History} options={{headerShown:false}}/>
         </Stack.Navigator>
 
   )
