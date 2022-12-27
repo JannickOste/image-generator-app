@@ -1,10 +1,10 @@
-import {Button, TextInput, View, Image, ActivityIndicator, ScrollView} from "react-native";
+import { Image, ActivityIndicator, ScrollView} from "react-native";
 import {useState} from "react";
 import "react-native-url-polyfill/auto"
 import React from "react";
 import SearchBox from "./SearchBox";
 import OpenAPI from "../OpenAPI";
-import ImageHistoryItem, { ImageHistoryItemProps } from "./ImageHistoryItem";
+import { ImageHistoryItemProps } from "./ImageHistoryItem";
 import { LoadHistoryImages, UpdateHistoryImages } from "./pages/History";
 
 export type CreateImageState = {
