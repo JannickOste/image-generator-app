@@ -1,6 +1,5 @@
-import React, { useCallback } from "react";
-import{Alert, Button, Linking, StyleSheet,Text} from "react-native"
-import { TouchableOpacity } from "react-native-gesture-handler";
+import React from "react";
+import{Alert,Linking, Pressable, StyleSheet,Text} from "react-native"
 interface ButtonUrlProps {
     url:string
 }
@@ -18,7 +17,7 @@ const handlePress =async  ()=>{
 }
 return (
     <>
-          <Button onPress={()=>handlePress()} title="Policies"/>
+          <Pressable style={styles.touchable} onPress={()=>handlePress()}><Text style={styles.touchableText}>Policies</Text></Pressable>
 
     </>
 )
@@ -26,21 +25,14 @@ return (
 export default ButtonUrl;
 
 const styles = StyleSheet.create({
-    linkfield:{
-        margin:25,
-        fontSize:30,
-        fontWeight:'bold', 
-        textAlign:'center',
-        textDecoration:"none",
-        color:"blue"
-      },
       touchable:{
-        backgroundColor:"rgba(0,100,100,0.7)",
+        backgroundColor:"rgba(200,0,230,1)",
         borderRadius:7,
         width:120,
         height:30,
         justifyContent:"center",
-        alignItems:"center"
+        alignItems:"center",
+        elevation:3
       },
       touchableText:{
         fontSize:20,

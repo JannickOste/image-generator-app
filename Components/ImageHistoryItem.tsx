@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         marginBottom:"5%"
     },
     button:{
-        backgroundColor:"rgba(200,100,200,0.7)",
+        backgroundColor:"rgba(200,100,200,1)",
         alignItems:"center",
         justifyContent:"center",
         paddingVertical:12,
