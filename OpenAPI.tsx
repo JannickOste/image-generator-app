@@ -5,7 +5,7 @@ class OpenAPI
 {
     private static singleton: OpenAPI | undefined;
     public static get Singleton() { return this.singleton ? this.singleton : (this.singleton = new OpenAPI({
-        apiKey:"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"
+        apiKey:"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"
     }))}
 
     private readonly openai: OpenAIApi;
