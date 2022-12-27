@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import Constants from 'expo-constants';
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text,StyleSheet } from "react-native";
+import { ScrollView,StyleSheet } from "react-native";
 import CustomHeader from "../header";
 import ImageHistoryItem, { ImageHistoryItemProps } from "../ImageHistoryItem";
 import WavyHeader from "../wavyHeader";
@@ -34,7 +34,7 @@ const ImageHistory = () => {
     return (
       
        
-        <ScrollView>            
+        <ScrollView style={{width:"100%"}}>            
             {state.items.map(i => 
                 <ImageHistoryItem 
                     id={i.id} 

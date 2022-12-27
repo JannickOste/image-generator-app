@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
     },
     imageContainer:{
         marginHorizontal: "auto",
+    },
+    image:{
+        borderRadius:15, 
         zIndex:1
     },
     historyContainer:{
@@ -26,10 +29,9 @@ const styles = StyleSheet.create({
         backgroundColor:"rgba(0,0,0,0.2)",
         borderBottomLeftRadius:7,
         borderBottomRightRadius:7,
-        width:"100%",
         zIndex:0,
-        top:-11,
-        paddingTop:15,
+        top:-10,
+        paddingTop:11,
         marginBottom:"5%"
     },
     button:{
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
         paddingVertical:12,
         paddingHorizontal:0,
         elevation:3,
-        width:"70%",
+        width:"50%",
         marginBottom:5
     },
     buttonText:{
@@ -55,11 +57,9 @@ const ImageHistoryItem = ({id, searchQuery, uri, onRemove}: ImageHistoryItemProp
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
-                <Image source={{uri: uri, width: 255, height: 255}} style={{borderRadius:15}} /> 
+                <Image source={{uri: uri, width: 255, height: 255}} style={styles.image} /> 
+                <Text style={styles.historyContainer}>{searchQuery}</Text>
             </View>  
-            <Text style={styles.historyContainer}>{searchQuery}</Text>
-            
-            
             <Pressable style={styles.button}><Text style={styles.buttonText}>Generate a similair image</Text></Pressable>
             <Pressable style={styles.button} onPress={() => onRemove ? onRemove(id) : () => {}}><Text style={styles.buttonText}>Remove from history</Text></Pressable>
         </View>
