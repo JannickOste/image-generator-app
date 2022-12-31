@@ -1,10 +1,10 @@
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import { Image, StyleSheet, TouchableOpacity, View,Text} from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View,Text, Dimensions} from "react-native";
 import React, {useEffect, useState,useRef,  } from "react";
 import {launchImageLibraryAsync,MediaTypeOptions, requestMediaLibraryPermissionsAsync} from "expo-image-picker";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import {useNavigation} from "@react-navigation/native"
+import {useIsFocused, useNavigation} from "@react-navigation/native"
 import { RootStackParamList } from "../Stack.navigator";
 import { SafeAreaView } from "react-navigation";
 import Constants from "expo-constants";
@@ -12,44 +12,53 @@ import WavyHeader from "../wavyHeader";
 import { LinearGradient } from "expo-linear-gradient";
 import CustomHeader from "../header";
 const svg="M0,128L48,138.7C96,149,192,171,288,197.3C384,224,480,256,576,250.7C672,245,768,203,864,176C960,149,1056,139,1152,165.3C1248,192,1344,256,1392,288L1440,320L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+
+const chooseImageFromLibrary = (assignmentCallback: (uri:string) => void) => async () => {
+  let result = await launchImageLibraryAsync({
+    mediaTypes: MediaTypeOptions.Images,
+    quality: 0.5,
+    allowsEditing: true,
+  });
+  if (!result.cancelled) {
+    assignmentCallback(result.uri)
+  }
+};
+
+const takeCameraPicture = async (cameraInstance: Camera, assignmentCallback: (uri:string) => void) => {
+  if (cameraInstance) {
+    const photo = await cameraInstance.takePictureAsync({ quality: 1, exif: false })
+
+    await MediaLibrary.saveToLibraryAsync(photo.uri);
+    assignmentCallback(photo.uri)
+  } 
+};
+
+type CreateState = {
+  photo?:string;
+  cameraEnabled?:boolean;
+  cameraReference:React.RefObject<Camera>
+}
+
 const Create = () => {
-  const [photo, setPhoto] = useState<string | null>(null);
+  const [state, setState] = useState<CreateState>({
+    cameraReference: useRef<Camera>(null)
+  });
+  
   const [CameraPermission, requestCameraPermission] = Camera.useCameraPermissions();
-  const [CameraOn, setCameraOn] = useState(false);
   //navigation won't work with props unless i specify type of navigation prop
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+  const setCameraState = (cameraState:boolean) => setState({...state, cameraEnabled: cameraState});
+
+
   useEffect(() => {
     (async () => {
-      const { status } =
-        await requestMediaLibraryPermissionsAsync();
-      requestCameraPermission;
-      if (status !== "granted")
+      if ((await requestMediaLibraryPermissionsAsync()).status !== "granted")
         alert("Sorry, Camera roll permissions are required.");
+      else if((await requestCameraPermission()).granted)
+        alert("Sorry, Storage permissions are required.");
     })();
   }, []);
-  const cameraRef = useRef<Camera>(null);
-  const takePicture = async () => {
-    if (cameraRef.current) {
-      await cameraRef.current
-        .takePictureAsync({ quality: 1, exif: false })
-        .then(async (photo) => {
-          await MediaLibrary.saveToLibraryAsync(photo.uri);
-          setPhoto(photo.uri);
-          setCameraOn(false);
-        });
-    }
-  };
-  const chooseImg = async () => {
-    let result = await launchImageLibraryAsync({
-      mediaTypes: MediaTypeOptions.Images,
-      quality: 0.5,
-      allowsEditing: true,
-    });
-    if (!result.cancelled) {
-      setPhoto(result.uri);
-      console.log(photo)
-    }
-  };
+
 
   return (
     <>
@@ -64,37 +73,44 @@ const Create = () => {
         <CustomHeader title="Select Image" />
     <SafeAreaView style={styles.viewArea}>
       <View style={styles.ImageContainer}>
-      {photo ? (
-        <Image source={{ uri: photo }}  style={styles.imageStyle}/>
-      ) : (
-        <Text style={styles.imageText}>No image selected</Text>
-      )}
-      {CameraOn && CameraPermission ? (
-        <Camera style={styles.camera} type={CameraType.back} ref={cameraRef} />
-      ) : (
-        <></>
-      )}
+        <>
+        {state.photo 
+          ? (<Image source={{ uri: state.photo }}  style={styles.imageStyle}/>) 
+          : (<>
+            {state.cameraEnabled && CameraPermission 
+              ? (<Camera style={styles.camera} type={CameraType.back} ref={state.cameraReference} />)
+              : (<Text style={styles.imageText}>No image selected</Text>)
+            }
+            </>)
+        }
+
+        </>
       </View>
+
       <View style={styles.buttonContainer}>
-      {!CameraOn ? (
+      {!state.cameraEnabled ? (
         <TouchableOpacity style={styles.button}onPress={() => {
-          console.log(CameraOn);
-          setCameraOn(true), requestCameraPermission;
+          setCameraState(true), requestCameraPermission();
         }}>
         <Text style={styles.buttonText}>Open camera</Text>
         </TouchableOpacity>
       ) : (
         <TouchableOpacity style={styles.button} onPress={async () => {
-          await takePicture();
-          setCameraOn(false);
+          if(state.cameraReference.current)
+          {
+
+            setCameraState(true);
+            await takeCameraPicture(state.cameraReference.current, (uri) =>  setState({...state, photo: uri, cameraEnabled: false}));
+          }
+          else alert("No camera permissions...");
         }}>
         <Text style={styles.buttonText}>"Take Picture"</Text>
         </TouchableOpacity>
       )}
-      <TouchableOpacity style={styles.button} onPress={chooseImg}>
+      <TouchableOpacity style={styles.button} onPress={chooseImageFromLibrary((uri) => setState({...state, photo: uri}))}>
       <Text style={styles.buttonText}>Gallery</Text>
       </TouchableOpacity>
-      {photo ? (
+      {state.photo ? (
         <TouchableOpacity style={styles.button} onPress={() => {
           navigation.navigate("Images", {uri: "https://i0.wp.com/marketbusinessnews.com/wp-content/uploads/2018/04/Ullage.jpg?fit=776%2C659&ssl=1"});
         }}>
@@ -112,7 +128,9 @@ const Create = () => {
 
 const styles = StyleSheet.create({
   camera:{
-flex:1
+    flex:1,
+    width: Dimensions.get("window").width*.5,
+    height: Dimensions.get("window").width*.5
   },
   button:{
     alignItems:"center",

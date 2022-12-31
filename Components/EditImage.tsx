@@ -1,15 +1,12 @@
-import React,{  useRef, useState} from 'react';
-import {Button, ImageBackground, TextInput,StyleSheet} from "react-native"
+import React,{  Component, useRef, useState} from 'react';
+import {Button, ImageBackground, TextInput} from "react-native"
 import {Canvas,CanvasRef, PathType,DrawingTool} from '@benjeau/react-native-draw';
 import { RouteProp, useRoute } from '@react-navigation/native';
 interface EditImageProps {
     uri:string
 }
-const styles = StyleSheet.create({
-    canvas:{
-        backgroundColor:'rgba(52, 52, 52, 0.0)'
-    }
-})
+
+
 const EditImage  =(()=>{
     const [paths,setPaths] = useState<PathType[]>([]);
     const [prompt, setPrompt] = useState<string>("");
@@ -29,6 +26,7 @@ const EditImage  =(()=>{
         canvasRef.current?.clear();
     }
    return   <>
+   
    <ImageBackground source={{uri:uri}} style={{height:500}}>
    <Canvas
         ref={canvasRef}
@@ -37,9 +35,8 @@ const EditImage  =(()=>{
         thickness={15}
         tool={DrawingTool.Brush}
         opacity={1}
-        style={styles.canvas}
+        style={{backgroundColor:'rgba(52, 52, 52, 0.0)',}}
         onPathsChange={(event)=>{addPath(event)}}
-        
     />
     </ImageBackground>  
     <Button title="undo" onPress={()=>{handleUndo; console.log(paths)}}/>
