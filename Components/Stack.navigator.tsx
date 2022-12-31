@@ -7,6 +7,7 @@ import Images from "./pages/Images";
 import History from "./pages/History";
 import ImageGenerator, { APIImageProps } from "./ImageGenerator";
 import EditImage from "./EditImage";
+import FeatureDisabled from "./pages/FeatureDisabled";
 
 
 
@@ -18,7 +19,7 @@ export const CreateNavigator = ()=>{
   return (
     <Stack.Navigator>
         <Stack.Screen name="create image" component={Create} options={{headerShown:false}}/>
-        <Stack.Screen name="EditImage" component={EditImage} options={{headerShown:false}}/>
+        <Stack.Screen name="EditImage" component={FeatureDisabled} options={{headerShown:false}}/>
     </Stack.Navigator>
     )
 
