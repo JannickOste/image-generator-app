@@ -64,7 +64,6 @@ const ImageHistoryItem = ({id, searchQuery, uri, onRemove}: ImageHistoryItemProp
                 <Image source={{uri: uri, width: 255, height: 255}} style={styles.image} /> 
                 <Text style={styles.historyContainer}>{searchQuery}</Text>
             </View>  
-            <Pressable style={styles.button}><Text style={styles.buttonText}>Generate a similair image</Text></Pressable>
             <Pressable style={styles.button} onPress={() => onRemove ? onRemove(id) : () => {}}><Text style={styles.buttonText}>Remove from history</Text></Pressable>
         </View>
     )   
